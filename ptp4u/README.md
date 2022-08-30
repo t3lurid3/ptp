@@ -2,12 +2,12 @@
 Scalable PTPv2.1 two-step unicast server implementation
 
 ## Run
-Normally default arguments are good for most of the cases.
-However, there is a lot of room for cusomisation:
+Normally default arguments are good for most use cases.
+However, there is a lot of room for customisation:
 ```
 /usr/local/bin/ptp4u -iface eth1 -workers 100 -minsubinterval 1us -monitoringport 1234
 ```
-This will run ptp4u on eth1 with 100 workers and allowing 1us subscriptions. Instance can be monitored on port 1234
+This will run ptp4u on eth1 with 100 workers and allowing 1us subscriptions. Instance can be monitored on port 1234.
 
 ## Monitoring
 By default ptp4u runs http server serving json monitoring data. Ex:
@@ -33,19 +33,19 @@ $ curl localhost:8888 | jq
 ```
 This returns manu usefull metrics such as number of active subscriptions, tx/rx stats etc.
 
-## Performace
-We were able to generate and consistently support over 1M clients with syncronization frequency of 1Hz.
+## Performance
+We were able to generate and consistently support over 1M clients with synchronization frequency of 1Hz.
 
-We used a follwing setup:
+We used the following setup:
 * HPE DL380 G10 single CPU system.
 * Arista 7010 network switch with 2 VLANs.
-* Calnex Sentinel to monitor the precision over the PTP compared to the GPS source.
+* Calnex Sentinel to monitor the precision over PTP compared to the GPS source.
 * Spirent N4U to generate test clients and verify timing correctness.
 
-Here one can see 1000513 clients registered on `ptp4u` side, where:
+Here one can see 1,000,513 clients registered on `ptp4u` side, where:
 * 512 are constantly verified for the timing violations.
 * 1 is a Calnex Sentinel to verify precision effect from the load. The vertical line represents the beginning of the test.
-* 1000000 generated using traffic generator feature.
+* 1,000,000 generated using traffic generator feature.
 ![image](https://user-images.githubusercontent.com/4749052/137388307-7d0e9e6b-df42-4d3d-bc23-b85bab458548.png)
 Spirent N4U showing 512 monitoring clients are working as expected:
 ![image](https://user-images.githubusercontent.com/4749052/137388205-89b57751-8dca-49ab-8a6b-b43bd0382783.png)
